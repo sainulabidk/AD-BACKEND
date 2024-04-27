@@ -69,6 +69,10 @@ exports.logout = async (req, res) => {
 exports.mailVerification = async (req, res) => {
   try {
     const { _id } = req.body;
+    const validUser = await User.findOne({ _id, verified: true });
+    if (validUser) {
+      return res.status(404).json({ message: 'User already signed up this link is expired' });
+    }
     const updatedUser = await User.findOneAndUpdate(
       { _id },
       { verified: true },
