@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const productSchema = require('./products.mode');
+const addressSchema = require('./address.model');
 
 const userSchema = new mongoose.Schema({
   userID: { type: String, unique: true },
@@ -9,14 +11,12 @@ const userSchema = new mongoose.Schema({
   verified:{type:Boolean,default:false},
   role: { type: String, enum: ['Customer', 'Admin', 'Agent'], default: 'Customer' },
   email: { type: String,unique:true},
-  mobileNo: { type: String },
-  mobileNo2: { type: String },
+  address:addressSchema, 
+  products: [productSchema],
   glCode: { type: String },
   orgId: { type: String },
   orgName: { type: String },
   country: { type: String },
-  status: { type: String, enum: ['active', 'inactive'], default: 'active' },
-  userType: { type: String, enum: ['INDV', 'ORG'], default: 'INDV' },
   deviceId: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

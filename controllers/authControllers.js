@@ -1,7 +1,6 @@
 const User = require("../models/user.model");
 const bcrypt = require('bcrypt');
 const generateToken = require("../utils/generateToken");
-const nodemailer = require("nodemailer");
 const dotenv=require("dotenv");
 const sendMail = require("../utils/sendMail");
 dotenv.config();
@@ -37,9 +36,13 @@ exports.signup = async (req, res) => {
 exports.signin = async (req, res, next) => {
   const { email, password } = req.body;
   try {
-    const validUser = await User.findOne({ email, verified: true });
+    const validUser = await User.findOne({ email });
     if (!validUser) {
       return res.status(404).json({ message: 'User not found' });
+    }
+    
+    if (!validUser.verified) {
+      return res.status(400).json({ message: 'Please verify your email. check your E-mail for verification link.' });
     }
 
     // check verified is true 
@@ -55,16 +58,8 @@ exports.signin = async (req, res, next) => {
   }
 };
 
-// logout
 
-exports.logout = async (req, res) => {
-  try {
-    await res.clearCookie('token').status(200).json('Signout success!');
-  } catch (error) {
-    console.error('Error occurred during logout:', error);
-    res.status(500).json({ message: 'Internal Server Error' });
-  }
-}
+// E-maii verification
 
 exports.mailVerification = async (req, res) => {
   try {
@@ -88,3 +83,13 @@ exports.mailVerification = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+
+// logout
+exports.logout = async (req, res) => {
+  try {
+    await res.clearCookie('token').status(200).json('Signout success!');
+  } catch (error) {
+    console.error('Error occurred during logout:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+}
