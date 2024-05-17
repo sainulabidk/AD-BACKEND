@@ -7,6 +7,7 @@ const verifyToken = require('../utils/verifyToken');
 router.get('/',authController.getAll);
 router.get('/logout',authController.logout);
 router.get("/get-all-users",verifyToken,userController.getAllUsers);
+router.get("/agent/:id",userController.getAgentRoleByUserId);
 router.post('/sign-up',authController.signup); 
 router.post('/sign-in',authController.signin);
 router.post('/verify-email',authController.mailVerification);

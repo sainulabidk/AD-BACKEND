@@ -7,7 +7,10 @@ const productSchema = new mongoose.Schema({
     price: { type: Number },
     images: [{ type: String }],
     inventory: { type: Number },
-    availability: { type: Boolean }
+    availability:  { type: String, enum: ['In stock', 'Out of stock', ]},
+    
 });
 
-module.exports = productSchema;
+const Products = mongoose.model('Product', productSchema);
+
+module.exports = Products;

@@ -6,4 +6,4 @@ const CategorySchema = new Schema({
 
 const Category = model("Category", CategorySchema);
 
-module.exports = Category;
+module.exports = Category;  

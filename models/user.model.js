@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const productSchema = require('./products.mode');
 const addressSchema = require('./address.model');
 
 const userSchema = new mongoose.Schema({
@@ -12,7 +11,6 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ['Customer', 'Admin', 'Agent'], default: 'Customer' },
   email: { type: String,unique:true},
   address:addressSchema, 
-  products: [productSchema],
   glCode: { type: String },
   orgId: { type: String },
   orgName: { type: String },
@@ -26,6 +24,6 @@ const userSchema = new mongoose.Schema({
 
 },{collection: "userData" });
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema); 
 
 module.exports = User;

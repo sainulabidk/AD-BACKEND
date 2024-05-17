@@ -4,6 +4,7 @@ const app = express();
 const mongooseConnect = require("./config/config")
 const userRoutes = require('./routes/userRoute');
 const categoryRoutes = require('./routes/categoryRoute');
+const ProductRoute = require('./routes/ProductRoute');
 const cors = require('cors');
 const cookieparser = require("cookie-parser");
 
@@ -24,6 +25,7 @@ app.use(cookieparser());
 // Use routes
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', categoryRoutes);
+app.use('/api/v1', ProductRoute);
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
