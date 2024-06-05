@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
   credentials: true,
-  origin: 'https://ad-backend-1v1z.onrender.com/'
+  origin: https://ad-backend-1v1z.onrender.com/api/v1
 }));
 
 app.get('/', (req, res) => {
