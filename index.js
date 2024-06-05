@@ -14,11 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors({
   credentials: true,
-  origin: 'https://ad-backend-1v1z.onrender.com/api/v1'
+  origin: 'https://ad-ecommerce.onrender.com'  
 }));
 
 app.get('/', (req, res) => {
-    res.json({"message": "Hello Your Server Is Running"});
+    res.json({"message": "Hello Your Server Is Running ecom"});
 });
 
 // Use cookie-parser middleware
